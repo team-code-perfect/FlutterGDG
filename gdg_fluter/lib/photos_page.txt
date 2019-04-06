@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class PhotosPage extends StatefulWidget
+{
+  @override
+  _PhotosPageState createState() => _PhotosPageState();
+
+}
+
+class _PhotosPageState extends State<PhotosPage>{
+  List<Photos>PhtosList;
+  @override
+  void initState()
+  {
+  super.initState();
+  fetchData();
+  }
+  fetchData()
+  {
+
+    var url="https://picsum.photos/list";
+    var res= await http.get(url);
+    var decodedJson=jsonDecode(res.body);
+    photosList=decodedJson;
+    setState(() {
+      
+    });
+
+  }
+   @override
+  WidgetBuilder(BuildContext context)
+  {
+    return Scaffold(
+      appBar:AppBar(
+        title: Text("Photos Page"),
+      ) ,
+      
+      body: photosList==null
+      ? Center(
+        child: CircularProgressIndicator(),
+      )
+      :ListView.builder(
+        itemCount: photsList.length,
+        itemBuilder: (context,index)
+        {
+          return Text(ph)
+        },
+
+      )
+      
+      
+    );  
+     }
+  
+  
+  
+}
+
